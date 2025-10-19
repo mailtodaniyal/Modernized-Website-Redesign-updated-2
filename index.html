@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G45 - Diabetes Coaching & Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1a73e8;
+            --light-blue: #e8f0fe;
+            --dark-blue: #0d47a1;
+            --accent-green: #34a853;
+            --accent-red: #ea4335;
+            --accent-orange: #f9ab00;
+            --text-dark: #202124;
+            --text-light: #5f6368;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --medium-gray: #dadce0;
+            --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            --gradient-light: linear-gradient(135deg, var(--light-blue), #bbdefb);
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 15px 25px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            background: var(--gradient-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stats {
+            display: flex;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            margin-right: 40px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Bubbles Animation */
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 0;
+        }
+
+        /* Section Common Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        /* Frustration Section */
+        .frustration {
+            background-color: var(--white);
+        }
+
+        .frustration-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .frustration-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .frustration-box {
+            flex: 1;
+            background-color: #ffebee;
+            border-left: 5px solid var(--accent-red);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .frustration-list {
+            list-style: none;
+        }
+
+        .frustration-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .frustration-list li:before {
+            content: "✗";
+            color: var(--accent-red);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Differentiator Section */
+        .differentiator {
+            background-color: var(--light-gray);
+        }
+
+        .diff-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .diff-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .diff-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .diff-content {
+            flex: 1;
+            padding-left: 40px;
+        }
+
+        .diff-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .diff-feature {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .diff-icon {
+            background: var(--gradient-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--white);
+            font-size: 20px;
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .result-box {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--light-gray);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .stars {
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--gradient-primary);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 70px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-contact p {
+            margin-bottom: 10px;
+            color: var(--medium-gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--primary-blue);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Dotted Animation */
+        .dotted-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(26, 115, 232, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content, .frustration-container, .diff-container {
+                flex-direction: column;
+            }
+            
+            .hero-text, .frustration-text, .diff-content {
+                padding-right: 0;
+                padding-left: 0;
+                margin-bottom: 40px;
+            }
+            
+            .process-steps, .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .process-steps, .services-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+            }
+            
+            .stat-item {
+                margin-right: 20px;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .float-animation {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">G45</a>
+            
+            <ul class="nav-links">
+                <li><a href="#">Domů</a></li>
+                <li><a href="#">O mně</a></li>
+                <li><a href="#">Služby</a></li>
+                <li><a href="#">Cesty</a></li>
+                <li><a href="#">Knihy</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Kontakt</a></li>
+            </ul>
+            
+            <a href="#" class="btn">Začněte hned</a>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="bubbles" id="bubbles"></div>
+        <div class="dotted-animation" id="dotted"></div>
+        
+        <div class="container hero-content">
+            <div class="hero-text animated">
+                <h1>Před 10 lety jsem byl tam, <span style="color: var(--accent-green);">kde jste vy teď</span></h1>
+                <p>Pomáhám lidem s diabetem najít cestu z bludného kruhu strachu, nejistoty a frustrace. Začněte žít naplno i s diabetem.</p>
+                <a href="#" class="btn">Zlepším váš život</a>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">let s diabetem</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10k+</div>
+                        <div class="stat-label">spokojených klientů</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5.2</div>
+                        <div class="stat-label">průměrný glykovaný hemoglobin</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image float-animatio">
+                <img src="hero.jpg" alt="G45 Diabetes Coaching">
+            </div>
+        </div>
+    </section>
+
+    <!-- Frustration Section -->
+    <section class="section frustration">
+        <div class="container frustration-container">
+            <div class="frustration-text animated">
+                <h2>Cítíte se ztraceni v managementu diabetu?</h2>
+                <p>Vím, jak frustrující může být neustálé bojování s hladinou cukru v krvi, strach z komplikací a pocit, že vám nikdo nerozumí.</p>
+                <p>Diabetem trpím přes 15 let a prošel jsem si vším, co nyní prožíváte vy.</p>
+            </div>
+            
+            <div class="frustration-box animated delay-1">
+                <h3>Časté frustrace diabetiků:</h3>
+                <ul class="frustration-list">
+                    <li>Neustálé výkyvy hladiny cukru v krvi</li>
+                    <li>Strach z dlouhodobých komplikací</li>
+                    <li>Pocit, že vám nikdo nerozumí</li>
+                    <li>Omezení v jídelníčku a životním stylu</li>
+                    <li>Nevědět, kterým radám věřit</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentiator Section -->
+    <section class="section differentiator">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>Proč G45 není jen další diabetická poradna</h2>
+                <p>Kombinuji osobní zkušenost, odborné znalosti a vědecký přístup k diabetu</p>
+            </div>
+            
+            <div class="diff-container">
+                <div class="diff-image animated">
+                    <img src="https://placehold.co/400x500/1a73e8/FFFFFF?text=Osobní+Konzultace" alt="Osobní konzultace">
+                </div>
+                
+                <div class="diff-content animated delay-1">
+                    <h3>Objevil jsem něco, co změnilo můj život</h3>
+                    <p>Po letech hledání a experimentování jsem našel způsob, jak žít plnohodnotný život s diabetem. Nyní předávám tyto znalosti svým klientům.</p>
+                    
+                    <div class="diff-features">
+                        <div class="diff-feature">
+                            <div class="diff-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div>
+                                <h4>Osobní zkušenost</h4>
+                                <p>15+ let s diabetem</p>
+                            </div>
+                        </div>
+                        
+                        <div class="diff-feature">
+                            <div class="diff-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div>
+                                <h4>14 odborných knih</h4>
+                                <p>Odborné publikace</p>
+                            </div>
+                        </div>
+                        
+                        <div class="diff-feature">
+                            <div class="diff-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <div>
+                                <h4>Vědecký přístup</h4>
+                                <p>Založeno na výzkumech</p>
+                            </div>
+                        </div>
+                        
+                        <div class="diff-feature">
+                            <div class="diff-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div>
+                                <h4>Realistické cíle</h4>
+                                <p>Dosažitelné výsledky</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>Má cesta z diabetického pekla – ve 3 krocích</h2>
+                <p>Jednoduchý a ověřený proces, který vede k lepšímu managementu diabetu</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="step-card animated">
+                    <div class="step-number">1</div>
+                    <h3>Pravda o vašem těle</h3>
+                    <p>Společně prozkoumáme váš současný zdravotní stav a identifikujeme oblasti, které potřebují zlepšení.</p>
+                </div>
+                
+                <div class="step-card animated delay-1">
+                    <div class="step-number">2</div>
+                    <h3>Individuální řešení</h3>
+                    <p>Vytvoříme personalizovaný plán, který zohlední váš životní styl, preference a cíle.</p>
+                </div>
+                
+                <div class="step-card animated delay-2">
+                    <div class="step-number">3</div>
+                    <h3>Dlouhodobá udržitelnost</h3>
+                    <p>Naučíme vás strategie, jak si udržet dosažené výsledky a dále je vylepšovat.</p>
+                </div>
+            </div>
+            
+            <div class="result-box animated delay-3">
+                <h3>Výsledek: místo strachu se začnete těšit na každý nový den.</h3>
+                <p>Získejte kontrolu nad svým diabetem a žijte život naplno.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>Jak vám předám to, co jsem se naučil za 15 let s diabetem</h2>
+                <p>Vyberte si z nabídky služeb a produktů, které vám pomohou zlepšit váš život s diabetem</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card animated">
+                    <div class="service-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Knihy & Publikace</h3>
+                    <p>Odborné knihy a publikace o managementu diabetu, výživě a životním stylu.</p>
+                    <a href="#" class="btn btn-outline">Více informací</a>
+                </div>
+                
+                <div class="service-card animated delay-1">
+                    <div class="service-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Personalizované služby</h3>
+                    <p>Individuální konzultace, koučink a podpora na míru vašim potřebám.</p>
+                    <a href="#" class="btn btn-outline">Více informací</a>
+                </div>
+                
+                <div class="service-card animated delay-2">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Videa a webináře</h3>
+                    <p>Naučná videa a online webináře o různých aspektech života s diabetem.</p>
+                    <a href="#" class="btn btn-outline">Více informací</a>
+                </div>
+                
+                <div class="service-card animated delay-3">
+                    <div class="service-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>Pokročilé suplementy</h3>
+                    <p>Doplněk stravy speciálně vyvinutý pro potřeby lidí s diabetem.</p>
+                    <a href="#" class="btn btn-outline">Více informací</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>Co říkají moji klienti</h2>
+                <p>Přečtěte si skutečné příběhy lidí, kteří změnili svůj život s diabetem</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card animated">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Díky G45 jsem se konečně naučil, jak efektivně manageovat svůj diabetes. Po letech marného boje mám konečně cukr pod kontrolou."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JP</div>
+                        <div>
+                            <h4>Jan Novák</h4>
+                            <p>Klient 2 roky</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card animated delay-1">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Konzultace s G45 mi změnily život. Konečně jsem našla někoho, kdo opravdu rozumí diabetu a dokáže poradit praktické řešení."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div>
+                            <h4>Marie Kovářová</h4>
+                            <p>Klientka 1 rok</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card animated delay-2">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">"Knihy a webináře od G45 mi otevřely oči. Dozvěděl jsem se to, co mi žádný lékař neřekl. Doporučuji každému, kdo se chce o diabetu dozvědět víc."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PP</div>
+                        <div>
+                            <h4>Petr Procházka</h4>
+                            <p>Klient 3 roky</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container animated">
+            <h2>Žijte naplno s G45!</h2>
+            <p>Začněte svou cestu k lepšímu životu s diabetem ještě dnes. První konzultace zdarma.</p>
+            <a href="#" class="btn" style="background: var(--white); color: var(--primary-blue);">Začněte hned</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="footer-logo">G45</div>
+                    <p>Pomáhám lidem s diabetem žít plnohodnotný život již přes 10 let. Společně můžeme dosáhnout skvělých výsledků.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Rychlé odkazy</h3>
+                    <ul>
+                        <li><a href="#">Domů</a></li>
+                        <li><a href="#">O mně</a></li>
+                        <li><a href="#">Služby</a></li>
+                        <li><a href="#">Knihy</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Kontakt</h3>
+                    <p><i class="fas fa-envelope"></i> info@g45.cz</p>
+                    <p><i class="fas fa-phone"></i> +420 123 456 789</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Praha, Česká republika</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 G45 Diabetes Coaching. Všechna práva vyhrazena.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Create bubbles animation
+        function createBubbles() {
+            const bubblesContainer = document.getElementById('bubbles');
+            const bubblesCount = 15;
+            
+            for (let i = 0; i < bubblesCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                const size = Math.random() * 60 + 20;
+                const posX = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 10;
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${posX}%`;
+                bubble.style.top = '100%';
+                bubble.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+        
+        // Create dotted animation
+        function createDots() {
+            const dottedContainer = document.getElementById('dotted');
+            const dotsCount = 20;
+            
+            for (let i = 0; i < dotsCount; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 2;
+                
+                dot.style.left = `${posX}%`;
+                dot.style.top = `${posY}%`;
+                dot.style.animation = `pulse 2s ease-in-out ${delay}s infinite alternate`;
+                
+                dottedContainer.appendChild(dot);
+            }
+        }
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animated');
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                
+                // If element is in viewport
+                if(position.top < window.innerHeight - 100) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initialize animations
+        window.addEventListener('load', function() {
+            createBubbles();
+            createDots();
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Initial check
+        });
+        
+        // Add pulse animation for dots
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { opacity: 0.2; transform: scale(0.8); }
+                100% { opacity: 0.6; transform: scale(1.2); }
+            }
+            
+            @keyframes float {
+                0% { 
+                    transform: translateY(0) rotate(0deg); 
+                    opacity: 0.7;
+                }
+                50% { 
+                    transform: translateY(-300px) rotate(180deg); 
+                    opacity: 0.4;
+                }
+                100% { 
+                    transform: translateY(-600px) rotate(360deg); 
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
